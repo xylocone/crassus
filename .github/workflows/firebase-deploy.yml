@@ -1,0 +1,26 @@
+name: Deploy to Firebase
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge branch \'develop\' into \'main\'')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Authenticate with Firebase
+        uses: firebase/login-action@v1
+        with:
+          project_id: <your-project-id>
+          token: ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Deploy to Firebase
+        run: firebase deploy
