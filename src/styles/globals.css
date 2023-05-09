@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.firebase-emulator-warning {
+  /* Hide the emulator warning */
+  display: none;
+}
