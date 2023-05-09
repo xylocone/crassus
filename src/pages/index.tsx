@@ -10,7 +10,7 @@ export async function getStaticProps() {
   const response = await callable();
 
   const apiResponse: Response = {
-    text: JSON.stringify(response.data),
+    text: `${(response.data as Response).text}`,
   };
 
   return {
@@ -31,7 +31,7 @@ export default function Home(props: { apiResponse: Response }) {
     .join("\n");
 
   return (
-    <div className="flex items-center justify-center p-4">
+    <div className="flex flex-col items-center justify-center h-[100vh] p-4">
       <p className="font-mono font-extrabold text-center">
         The response returned from the API is: {props.apiResponse.text}
       </p>
